@@ -23,6 +23,10 @@ import '../../features/reports/data/repositories/report_repository_impl.dart';
 import '../../features/reports/domain/repositories/report_repository.dart';
 import '../../features/reports/presentation/controllers/reports_controller.dart';
 import '../../features/reports/presentation/controllers/report_details_controller.dart';
+import '../../features/notifications/data/repositories/notification_repository_impl.dart';
+import '../../features/notifications/domain/repositories/notification_repository.dart';
+import '../../features/notifications/presentation/controllers/notifications_controller.dart';
+import '../../features/notifications/presentation/controllers/notification_form_controller.dart';
 
 class InitialBinding extends Bindings {
   @override
@@ -66,5 +70,11 @@ class InitialBinding extends Bindings {
     Get.put<ReportRepository>(reportRepository, permanent: true);
     Get.put<ReportsController>(ReportsController(reportRepository), permanent: true);
     Get.put<ReportDetailsController>(ReportDetailsController(reportRepository), permanent: true);
+
+    // Notifications
+    final notificationRepository = NotificationRepositoryImpl(networkService);
+    Get.put<NotificationRepository>(notificationRepository, permanent: true);
+    Get.put<NotificationsController>(NotificationsController(notificationRepository), permanent: true);
+    Get.put<NotificationFormController>(NotificationFormController(notificationRepository), permanent: true);
   }
 }

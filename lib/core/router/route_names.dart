@@ -13,6 +13,7 @@ class RouteNames {
   static const String reports = 'reports';
   static const String reportDetails = 'report-details';
   static const String notifications = 'notifications';
+  static const String notificationForm = 'notification-form';
   static const String analytics = 'analytics';
   static const String cms = 'cms';
   static const String supportTickets = 'support-tickets';

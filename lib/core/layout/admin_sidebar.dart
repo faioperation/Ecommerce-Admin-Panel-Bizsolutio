@@ -56,6 +56,7 @@ class AdminSidebar extends StatelessWidget {
                   _SidebarItem(icon: Icons.shopping_cart, label: 'Orders', route: '/orders', isCollapsed: isCollapsed),
                   _SidebarItem(icon: Icons.account_balance_wallet, label: 'Wallets', route: '/wallets', isCollapsed: isCollapsed),
                   _SidebarItem(icon: Icons.flag, label: 'Reports', route: '/reports', isCollapsed: isCollapsed),
+                  _SidebarItem(icon: Icons.notifications, label: 'Notifications', route: '/notifications', isCollapsed: isCollapsed),
                   _SidebarItem(icon: Icons.bar_chart, label: 'Analytics', route: '/analytics', isCollapsed: isCollapsed),
                   const Divider(),
                   _SidebarItem(icon: Icons.settings, label: 'Settings', route: '/settings', isCollapsed: isCollapsed),

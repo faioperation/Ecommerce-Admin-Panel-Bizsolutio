@@ -15,6 +15,8 @@ import '../../features/products/presentation/pages/products_page.dart';
 import '../../features/products/presentation/pages/product_details_page.dart';
 import '../../features/reports/presentation/pages/reports_page.dart';
 import '../../features/reports/presentation/pages/report_details_page.dart';
+import '../../features/notifications/presentation/pages/notifications_page.dart';
+import '../../features/notifications/presentation/pages/notification_form_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -148,7 +150,17 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/notifications',
           name: RouteNames.notifications,
-          builder: (context, state) => _placeholderPage('Push Notifications'),
+          builder: (context, state) => const NotificationsPage(),
+          routes: [
+            GoRoute(
+              path: 'form',
+              name: RouteNames.notificationForm,
+              builder: (context, state) {
+                final id = state.uri.queryParameters['id'];
+                return NotificationFormPage(notificationId: id);
+              },
+            ),
+          ],
         ),
         GoRoute(
           path: '/analytics',
