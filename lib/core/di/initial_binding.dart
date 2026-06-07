@@ -27,6 +27,13 @@ import '../../features/notifications/data/repositories/notification_repository_i
 import '../../features/notifications/domain/repositories/notification_repository.dart';
 import '../../features/notifications/presentation/controllers/notifications_controller.dart';
 import '../../features/notifications/presentation/controllers/notification_form_controller.dart';
+import '../../features/support/data/repositories/support_ticket_repository_impl.dart';
+import '../../features/support/domain/repositories/support_ticket_repository.dart';
+import '../../features/support/presentation/controllers/support_tickets_controller.dart';
+import '../../features/support/presentation/controllers/ticket_details_controller.dart';
+import '../../features/settings/data/repositories/settings_repository_impl.dart';
+import '../../features/settings/domain/repositories/settings_repository.dart';
+import '../../features/settings/presentation/controllers/settings_controller.dart';
 
 class InitialBinding extends Bindings {
   @override
@@ -76,5 +83,16 @@ class InitialBinding extends Bindings {
     Get.put<NotificationRepository>(notificationRepository, permanent: true);
     Get.put<NotificationsController>(NotificationsController(notificationRepository), permanent: true);
     Get.put<NotificationFormController>(NotificationFormController(notificationRepository), permanent: true);
+
+    // Support Tickets
+    final supportTicketRepository = SupportTicketRepositoryImpl(networkService);
+    Get.put<SupportTicketRepository>(supportTicketRepository, permanent: true);
+    Get.put<SupportTicketsController>(SupportTicketsController(supportTicketRepository), permanent: true);
+    Get.put<TicketDetailsController>(TicketDetailsController(supportTicketRepository), permanent: true);
+
+    // Settings
+    final settingsRepository = SettingsRepositoryImpl(networkService);
+    Get.put<SettingsRepository>(settingsRepository, permanent: true);
+    Get.put<SettingsController>(SettingsController(settingsRepository), permanent: true);
   }
 }

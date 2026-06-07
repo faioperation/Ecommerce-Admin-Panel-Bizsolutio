@@ -17,6 +17,9 @@ import '../../features/reports/presentation/pages/reports_page.dart';
 import '../../features/reports/presentation/pages/report_details_page.dart';
 import '../../features/notifications/presentation/pages/notifications_page.dart';
 import '../../features/notifications/presentation/pages/notification_form_page.dart';
+import '../../features/support/presentation/pages/support_tickets_page.dart';
+import '../../features/support/presentation/pages/ticket_details_page.dart';
+import '../../features/settings/presentation/pages/settings_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -175,12 +178,22 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/support-tickets',
           name: RouteNames.supportTickets,
-          builder: (context, state) => _placeholderPage('Support Tickets'),
+          builder: (context, state) => const SupportTicketsPage(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              name: RouteNames.supportTicketDetails,
+              builder: (context, state) {
+                final id = state.pathParameters['id']!;
+                return TicketDetailsPage(ticketId: id);
+              },
+            ),
+          ],
         ),
         GoRoute(
           path: '/settings',
           name: RouteNames.settings,
-          builder: (context, state) => _placeholderPage('Platform Settings'),
+          builder: (context, state) => const SettingsPage(),
         ),
         GoRoute(
           path: '/roles-permissions',
