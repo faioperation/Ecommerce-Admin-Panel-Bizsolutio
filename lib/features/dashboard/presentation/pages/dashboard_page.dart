@@ -57,20 +57,22 @@ class DashboardPage extends StatelessWidget {
             // ── Header ──────────────────────────────────────────────────
             Row(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dashboard', style: AppTextStyles.h2),
-                    const SizedBox(height: 4),
-                    Text(
-                      "Welcome back! Here's what's happening.",
-                      style: AppTextStyles.body.copyWith(
-                        color: AppColors.textSecondaryLight,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Dashboard', style: AppTextStyles.h2),
+                      const SizedBox(height: 4),
+                      Text(
+                        "Welcome back! Here's what's happening.",
+                        style: AppTextStyles.body.copyWith(
+                          color: AppColors.textSecondaryLight,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                const Spacer(),
+                const SizedBox(width: 8),
                 AppButton(
                   label: 'Refresh',
                   icon: Icons.refresh,

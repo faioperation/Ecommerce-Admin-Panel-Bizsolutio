@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import '../network/http_client.dart';
 import '../network/network_service.dart';
+import '../theme/theme_controller.dart';
 import '../../features/auth/data/repositories/auth_repository_impl.dart';
 import '../../features/auth/domain/repositories/auth_repository.dart';
 import '../../features/auth/presentation/controllers/auth_controller.dart';
@@ -38,6 +39,9 @@ import '../../features/settings/presentation/controllers/settings_controller.dar
 class InitialBinding extends Bindings {
   @override
   void dependencies() {
+    // Theme (must be first so app.dart can access it during build)
+    Get.put<ThemeController>(ThemeController(), permanent: true);
+
     // Core Services
     final httpClient = HttpClient();
     Get.put<HttpClient>(httpClient, permanent: true);

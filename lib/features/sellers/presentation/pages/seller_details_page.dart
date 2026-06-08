@@ -11,6 +11,7 @@ import '../../../../core/widgets/app_loader.dart';
 import '../../../../core/widgets/app_status_chip.dart';
 import '../../../../core/widgets/app_avatar.dart';
 import '../../../../core/widgets/app_confirmation_dialog.dart';
+import '../../../../core/layout/responsive_builder.dart';
 import '../controllers/seller_details_controller.dart';
 import '../widgets/kyc_review_card.dart';
 import '../widgets/seller_analytics_widget.dart';
@@ -62,13 +63,31 @@ class _SellerDetailsPageState extends State<SellerDetailsPage> {
           ),
           const SizedBox(height: AppSpacing.xl),
 
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Left Column: Profile & Settings
-              Expanded(
-                flex: 1,
-                child: Column(
+          ResponsiveBuilder.isMobile(context) || ResponsiveBuilder.isTablet(context)
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildLeftColumn(seller),
+                  const SizedBox(height: AppSpacing.xl),
+                  _buildRightColumn(seller),
+                ],
+              )
+            : Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 1, child: _buildLeftColumn(seller)),
+                  const SizedBox(width: AppSpacing.xl),
+                  Expanded(flex: 2, child: _buildRightColumn(seller)),
+                ],
+              ),
+        ],
+        ),
+      );
+    });
+  }
+
+  Widget _buildLeftColumn(dynamic seller) {
+    return Column(
                   children: [
                     // Profile Info
                     AppCard(
@@ -154,37 +173,27 @@ class _SellerDetailsPageState extends State<SellerDetailsPage> {
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: AppSpacing.xl),
-              
-              // Right Column: KYC & Analytics
-              Expanded(
-                flex: 2,
-                child: Column(
-                  children: [
-                    KycReviewCard(
-                      status: seller.kycStatus,
-                      onApprove: () => controller.reviewKyc(true),
-                      onReject: () => controller.reviewKyc(false),
-                    ),
-                    const SizedBox(height: AppSpacing.xl),
-                    SellerAnalyticsWidget(
-                      totalRevenue: seller.totalRevenue,
-                      totalSales: seller.totalSales,
-                      conversionRate: seller.conversionRate,
-                      rating: seller.rating,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
+      ],
+    );
+  }
+
+  Widget _buildRightColumn(dynamic seller) {
+    return Column(
+      children: [
+        KycReviewCard(
+          status: seller.kycStatus,
+          onApprove: () => controller.reviewKyc(true),
+          onReject: () => controller.reviewKyc(false),
         ),
-      );
-    });
+        const SizedBox(height: AppSpacing.xl),
+        SellerAnalyticsWidget(
+          totalRevenue: seller.totalRevenue,
+          totalSales: seller.totalSales,
+          conversionRate: seller.conversionRate,
+          rating: seller.rating,
+        ),
+      ],
+    );
   }
 
   Widget _buildInfoRow(String label, String value) {
@@ -194,7 +203,10 @@ class _SellerDetailsPageState extends State<SellerDetailsPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label, style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight)),
-          Text(value, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(value, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.right),
+          ),
         ],
       ),
     );
@@ -215,6 +227,7 @@ class _SellerDetailsPageState extends State<SellerDetailsPage> {
               ],
             ),
           ),
+          const SizedBox(width: 8),
           AppButton(
             label: buttonLabel,
             type: AppButtonType.outline,

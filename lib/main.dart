@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'app.dart';
 import 'core/config/environment.dart';
 
@@ -10,6 +11,7 @@ void main() async {
   EnvironmentConfig.init(env: Environment.dev);
 
   // 3. Initialize any other pre-run dependencies here (e.g., Firebase, Hive)
+  await GetStorage.init();
 
   // 4. Run the application
   runApp(const VangoLiveAdminApp());

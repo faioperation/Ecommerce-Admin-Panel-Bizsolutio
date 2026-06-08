@@ -28,6 +28,7 @@ class StatCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,11 +68,13 @@ class StatCard extends StatelessWidget {
                   color: isPositiveTrend ? AppColors.success : AppColors.error,
                 ),
                 const SizedBox(width: 4),
-                Text(
-                  trend!,
-                  style: AppTextStyles.caption.copyWith(
-                    color: isPositiveTrend ? AppColors.success : AppColors.error,
-                    fontWeight: FontWeight.w600,
+                Flexible(
+                  child: Text(
+                    trend!,
+                    style: AppTextStyles.caption.copyWith(
+                      color: isPositiveTrend ? AppColors.success : AppColors.error,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 4),

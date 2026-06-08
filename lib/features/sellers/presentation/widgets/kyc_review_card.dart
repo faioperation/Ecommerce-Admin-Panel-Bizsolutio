@@ -29,7 +29,8 @@ class KycReviewCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('KYC Verification', style: AppTextStyles.h4),
+              Expanded(child: Text('KYC Verification', style: AppTextStyles.h4)),
+              const SizedBox(width: 8),
               _buildStatusIndicator(),
             ],
           ),

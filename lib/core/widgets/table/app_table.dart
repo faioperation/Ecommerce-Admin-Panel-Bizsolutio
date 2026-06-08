@@ -91,28 +91,34 @@ class _AppTableState extends State<AppTable> {
   Widget _buildHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.lg),
-      child: Row(
+      child: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: AppSpacing.md,
+        runSpacing: AppSpacing.md,
         children: [
           Text(widget.title, style: AppTextStyles.h4),
-          const Spacer(),
-          if (widget.onSearch != null)
-            SizedBox(
-              width: 250,
-              child: AppSearchField(
-                hintText: 'Search...',
-                onChanged: widget.onSearch,
-              ),
-            ),
-          const SizedBox(width: AppSpacing.md),
-          if (widget.onFilter != null)
-            AppButton(
-              label: 'Filter',
-              icon: Icons.filter_list,
-              type: AppButtonType.outline,
-              onPressed: widget.onFilter,
-            ),
-          const SizedBox(width: AppSpacing.md),
-          // Export Menu
+          Wrap(
+            spacing: AppSpacing.md,
+            runSpacing: AppSpacing.md,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              if (widget.onSearch != null)
+                SizedBox(
+                  width: 250,
+                  child: AppSearchField(
+                    hintText: 'Search...',
+                    onChanged: widget.onSearch,
+                  ),
+                ),
+              if (widget.onFilter != null)
+                AppButton(
+                  label: 'Filter',
+                  icon: Icons.filter_list,
+                  type: AppButtonType.outline,
+                  onPressed: widget.onFilter,
+                ),
+              // Export Menu
           PopupMenuButton<String>(
             tooltip: 'Export',
             icon: const Icon(Icons.download),
@@ -154,7 +160,9 @@ class _AppTableState extends State<AppTable> {
           ],
         ],
       ),
-    );
+    ],
+  ),
+);
   }
 
   Widget _buildPagination() {

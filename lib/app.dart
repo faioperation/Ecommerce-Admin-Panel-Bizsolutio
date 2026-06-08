@@ -15,7 +15,7 @@ class VangoLiveAdminApp extends StatelessWidget {
       initialBinding: InitialBinding(),
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system, // Switches dynamically based on OS settings
+      themeMode: ThemeMode.system,
       routeInformationProvider: appRouter.routeInformationProvider,
       routeInformationParser: appRouter.routeInformationParser,
       routerDelegate: appRouter.routerDelegate,

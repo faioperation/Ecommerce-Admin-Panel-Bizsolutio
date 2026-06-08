@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'layout_controller.dart';
 import '../theme/app_spacing.dart';
-import '../theme/app_colors.dart';
 import 'responsive_builder.dart';
+import '../theme/app_colors.dart';
+import '../theme/theme_controller.dart';
 
 class AdminHeader extends StatelessWidget {
   const AdminHeader({super.key});
@@ -11,6 +12,7 @@ class AdminHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LayoutController layoutController = Get.find<LayoutController>();
+    final ThemeController themeController = Get.find<ThemeController>();
     final bool isMobile = ResponsiveBuilder.isMobile(context);
 
     return Container(
@@ -47,6 +49,30 @@ class AdminHeader extends StatelessWidget {
               ),
             ),
           if (!isMobile) const Spacer(),
+          // Theme Toggle
+          Obx(() {
+            final isDark = themeController.isDarkMode;
+            return PopupMenuButton<ThemeMode>(
+              icon: Icon(isDark ? Icons.dark_mode : Icons.light_mode),
+              tooltip: 'Theme',
+              onSelected: themeController.setThemeMode,
+              itemBuilder: (context) => const [
+                PopupMenuItem(
+                  value: ThemeMode.light,
+                  child: Row(children: [Icon(Icons.light_mode, size: 20), SizedBox(width: 8), Text('Light')]),
+                ),
+                PopupMenuItem(
+                  value: ThemeMode.dark,
+                  child: Row(children: [Icon(Icons.dark_mode, size: 20), SizedBox(width: 8), Text('Dark')]),
+                ),
+                PopupMenuItem(
+                  value: ThemeMode.system,
+                  child: Row(children: [Icon(Icons.settings_system_daydream, size: 20), SizedBox(width: 8), Text('System')]),
+                ),
+              ],
+            );
+          }),
+          const SizedBox(width: AppSpacing.sm),
           // Notifications
           IconButton(
             icon: const Badge(
