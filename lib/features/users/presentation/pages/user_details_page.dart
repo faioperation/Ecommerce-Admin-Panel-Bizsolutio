@@ -76,7 +76,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                       const SizedBox(height: AppSpacing.md),
                       Text(user.name, style: AppTextStyles.h3),
                       const SizedBox(height: AppSpacing.xs),
-                      Text(user.email, style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight)),
+                      Text(user.email, style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                       const SizedBox(height: AppSpacing.lg),
                       
                       _buildInfoRow('ID', user.id),
@@ -220,7 +220,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight)),
+          Text(label, style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
           Text(value, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500)),
         ],
       ),
@@ -231,7 +231,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight)),
+        Text(label, style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
         const SizedBox(height: AppSpacing.sm),
         Text(value, style: AppTextStyles.h2),
       ],
@@ -253,9 +253,9 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppTextStyles.h5.copyWith(color: isDestructive ? AppColors.error : AppColors.textPrimaryLight)),
+                Text(title, style: AppTextStyles.h5.copyWith(color: isDestructive ? AppColors.error : (Theme.of(context).brightness == Brightness.dark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight))),
                 const SizedBox(height: 4),
-                Text(description, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                Text(description, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
               ],
             ),
           ),

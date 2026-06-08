@@ -20,10 +20,10 @@ class QuickActionsWidget extends StatelessWidget {
             spacing: AppSpacing.md,
             runSpacing: AppSpacing.md,
             children: [
-              _buildActionButton('Add User', Icons.person_add, AppColors.primary, () {}),
-              _buildActionButton('New Report', Icons.bar_chart, AppColors.chartPalette[1], () {}),
-              _buildActionButton('Create Livestream', Icons.live_tv, AppColors.error, () {}),
-              _buildActionButton('Send Notification', Icons.notifications_active, AppColors.info, () {}),
+              _buildActionButton(context, 'Add User', Icons.person_add, AppColors.primary, () {}),
+              _buildActionButton(context, 'New Report', Icons.bar_chart, AppColors.chartPalette[1], () {}),
+              _buildActionButton(context, 'Create Livestream', Icons.live_tv, AppColors.error, () {}),
+              _buildActionButton(context, 'Send Notification', Icons.notifications_active, AppColors.info, () {}),
             ],
           ),
         ],
@@ -31,7 +31,7 @@ class QuickActionsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildActionButton(String label, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildActionButton(BuildContext context, String label, IconData icon, Color color, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
@@ -39,7 +39,7 @@ class QuickActionsWidget extends StatelessWidget {
         width: 120,
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.borderLight),
+          border: Border.all(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.borderDark : AppColors.borderLight)),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(

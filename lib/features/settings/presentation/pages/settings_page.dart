@@ -37,7 +37,7 @@ class SettingsPage extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 'Configure global platform behaviour, security policies and feature limits.',
-                style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight),
+                style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
               ),
               const SizedBox(height: AppSpacing.xl),
 
@@ -57,7 +57,7 @@ class SettingsPage extends StatelessWidget {
                           color: isActive ? AppColors.primary : Colors.transparent,
                           borderRadius: BorderRadius.circular(24),
                           border: Border.all(
-                            color: isActive ? AppColors.primary : AppColors.borderLight,
+                            color: isActive ? AppColors.primary : (Theme.of(context).brightness == Brightness.dark ? AppColors.borderDark : AppColors.borderLight),
                           ),
                         ),
                         child: Row(
@@ -66,13 +66,13 @@ class SettingsPage extends StatelessWidget {
                             Icon(
                               _tabs[i].icon,
                               size: 16,
-                              color: isActive ? Colors.white : AppColors.textSecondaryLight,
+                              color: isActive ? Colors.white : (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight),
                             ),
                             const SizedBox(width: 6),
                             Text(
                               _tabs[i].label,
                               style: AppTextStyles.bodySm.copyWith(
-                                color: isActive ? Colors.white : AppColors.textSecondaryLight,
+                                color: isActive ? Colors.white : (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight),
                                 fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
                               ),
                             ),
@@ -106,7 +106,7 @@ class SettingsPage extends StatelessWidget {
                     Text('Failed to load settings', style: AppTextStyles.h4),
                     const SizedBox(height: AppSpacing.sm),
                     Text(controller.error.value,
-                        style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                        style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                     const SizedBox(height: AppSpacing.lg),
                     TextButton.icon(
                       onPressed: controller.loadAllSettings,

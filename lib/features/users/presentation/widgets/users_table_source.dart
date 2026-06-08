@@ -47,7 +47,7 @@ class UsersTableSource extends AppTableSource<UserEntity> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(user.name, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600)),
-                      Text(user.email, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                      Text(user.email, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                     ],
                   ),
                 ),

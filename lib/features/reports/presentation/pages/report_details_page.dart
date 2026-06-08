@@ -93,7 +93,7 @@ class _ReportDetailsPageState extends State<ReportDetailsPage> {
                               decoration: BoxDecoration(
                                 color: AppColors.backgroundLight,
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: AppColors.borderLight),
+                                border: Border.all(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.borderDark : AppColors.borderLight)),
                               ),
                               child: Text(
                                 report.description,
@@ -122,7 +122,7 @@ class _ReportDetailsPageState extends State<ReportDetailsPage> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(report.targetName, style: AppTextStyles.h4),
-                                      Text('Target Type: \${report.targetType.toUpperCase()}', style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                                      Text('Target Type: \${report.targetType.toUpperCase()}', style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                                     ],
                                   ),
                                 ),
@@ -277,7 +277,7 @@ class _ReportDetailsPageState extends State<ReportDetailsPage> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+            Text(title, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
             Text(value, style: AppTextStyles.h5),
           ],
         ),
@@ -306,9 +306,9 @@ class _ReportDetailsPageState extends State<ReportDetailsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppTextStyles.h5.copyWith(color: isDestructive ? AppColors.error : AppColors.textPrimaryLight)),
+                Text(title, style: AppTextStyles.h5.copyWith(color: isDestructive ? AppColors.error : (Theme.of(context).brightness == Brightness.dark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight))),
                 const SizedBox(height: 4),
-                Text(description, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                Text(description, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
               ],
             ),
           ),

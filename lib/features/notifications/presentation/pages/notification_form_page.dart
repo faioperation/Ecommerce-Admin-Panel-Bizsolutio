@@ -109,7 +109,7 @@ class _NotificationFormPageState extends State<NotificationFormPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Notification Type', style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                                  Text('Notification Type', style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                                   const SizedBox(height: AppSpacing.sm),
                                   DropdownButtonFormField<String>(
                                     value: controller.type.value,
@@ -133,7 +133,7 @@ class _NotificationFormPageState extends State<NotificationFormPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Target Audience', style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                                  Text('Target Audience', style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                                   const SizedBox(height: AppSpacing.sm),
                                   DropdownButtonFormField<String>(
                                     value: controller.audience.value,
@@ -213,7 +213,7 @@ class _NotificationFormPageState extends State<NotificationFormPage> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(DateFormat('MMM d, yyyy - h:mm a').format(controller.scheduledFor.value)),
-                                        const Icon(Icons.calendar_today, size: 20, color: AppColors.textSecondaryLight),
+                                        Icon(Icons.calendar_today, size: 20, color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
                                       ],
                                     ),
                                   ),

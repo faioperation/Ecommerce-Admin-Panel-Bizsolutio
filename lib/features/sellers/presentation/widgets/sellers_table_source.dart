@@ -47,7 +47,7 @@ class SellersTableSource extends AppTableSource<SellerEntity> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(seller.shopName, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600)),
-                      Text(seller.email, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                      Text(seller.email, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                     ],
                   ),
                 ),

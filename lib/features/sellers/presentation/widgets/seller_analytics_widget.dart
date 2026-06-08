@@ -32,6 +32,7 @@ class SellerAnalyticsWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildMetric(
+                  context,
                   'Total Revenue',
                   NumberFormat.currency(symbol: '\$').format(totalRevenue),
                   Icons.attach_money,
@@ -40,6 +41,7 @@ class SellerAnalyticsWidget extends StatelessWidget {
               ),
               Expanded(
                 child: _buildMetric(
+                  context,
                   'Total Sales',
                   NumberFormat.compact().format(totalSales),
                   Icons.shopping_bag_outlined,
@@ -53,6 +55,7 @@ class SellerAnalyticsWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildMetric(
+                  context,
                   'Conversion Rate',
                   '\${conversionRate.toStringAsFixed(1)}%',
                   Icons.show_chart,
@@ -61,6 +64,7 @@ class SellerAnalyticsWidget extends StatelessWidget {
               ),
               Expanded(
                 child: _buildMetric(
+                  context,
                   'Avg Rating',
                   rating.toStringAsFixed(1),
                   Icons.star_outline,
@@ -74,7 +78,7 @@ class SellerAnalyticsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildMetric(String label, String value, IconData icon, Color color) {
+  Widget _buildMetric(BuildContext context, String label, String value, IconData icon, Color color) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -82,7 +86,7 @@ class SellerAnalyticsWidget extends StatelessWidget {
           children: [
             Icon(icon, size: 16, color: color),
             const SizedBox(width: 4),
-            Text(label, style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight)),
+            Text(label, style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
           ],
         ),
         const SizedBox(height: AppSpacing.xs),

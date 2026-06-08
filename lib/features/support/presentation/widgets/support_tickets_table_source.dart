@@ -29,7 +29,7 @@ class SupportTicketsTableSource extends AppTableSource<SupportTicketEntity> {
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
     final rowIndex = rows.indexOf(row);
-    final ticket = rawData.length > rowIndex ? rawData[rowIndex] : null;
+    final ticket = (rowIndex >= 0 && rowIndex < rawData.length) ? rawData[rowIndex] : null;
 
     return DataGridRowAdapter(
       cells: row.getCells().map<Widget>((cell) {
@@ -57,7 +57,7 @@ class SupportTicketsTableSource extends AppTableSource<SupportTicketEntity> {
             case 'urgent': color = AppColors.error; break;
             case 'high': color = AppColors.warning; break;
             case 'medium': color = AppColors.info; break;
-            default: color = AppColors.textSecondaryLight;
+            default: color = (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight);
           }
           return Container(
             alignment: Alignment.centerLeft,

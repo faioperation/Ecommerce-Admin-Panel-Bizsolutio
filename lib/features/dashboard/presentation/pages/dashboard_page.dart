@@ -66,7 +66,7 @@ class DashboardPage extends StatelessWidget {
                       Text(
                         "Welcome back! Here's what's happening.",
                         style: AppTextStyles.body.copyWith(
-                          color: AppColors.textSecondaryLight,
+                          color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight),
                         ),
                       ),
                     ],

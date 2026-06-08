@@ -98,7 +98,7 @@ class _SellerDetailsPageState extends State<SellerDetailsPage> {
                           const SizedBox(height: AppSpacing.md),
                           Text(seller.shopName, style: AppTextStyles.h3),
                           const SizedBox(height: AppSpacing.xs),
-                          Text(seller.ownerName, style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight)),
+                          Text(seller.ownerName, style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                           const SizedBox(height: AppSpacing.lg),
                           
                           _buildInfoRow('ID', seller.id),
@@ -202,7 +202,7 @@ class _SellerDetailsPageState extends State<SellerDetailsPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight)),
+          Text(label, style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
           const SizedBox(width: 8),
           Expanded(
             child: Text(value, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.right),
@@ -221,9 +221,9 @@ class _SellerDetailsPageState extends State<SellerDetailsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppTextStyles.h5.copyWith(color: isDestructive ? AppColors.error : AppColors.textPrimaryLight)),
+                Text(title, style: AppTextStyles.h5.copyWith(color: isDestructive ? AppColors.error : (Theme.of(context).brightness == Brightness.dark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight))),
                 const SizedBox(height: 4),
-                Text(description, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                Text(description, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
               ],
             ),
           ),

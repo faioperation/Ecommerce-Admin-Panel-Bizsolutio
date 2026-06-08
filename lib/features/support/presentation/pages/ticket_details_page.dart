@@ -73,7 +73,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
                       Text(ticket.subject, style: AppTextStyles.h2),
                       Text(
                         'Ticket #${ticket.id.replaceAll('ticket_', '')} · ${ticket.category} · ${ticket.userName}',
-                        style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight),
+                        style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
                       ),
                     ],
                   ),
@@ -139,7 +139,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
               const Spacer(),
               Text(
                 '${ticket.messages.length} message${ticket.messages.length == 1 ? '' : 's'}',
-                style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight),
+                style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
               ),
             ],
           ),
@@ -166,7 +166,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
             child: Icon(
               isAdmin ? Icons.support_agent : Icons.person,
               size: 18,
-              color: isAdmin ? Colors.white : AppColors.textSecondaryLight,
+              color: isAdmin ? Colors.white : (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight),
             ),
           ),
           const SizedBox(width: AppSpacing.md),
@@ -194,7 +194,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
                     const Spacer(),
                     Text(
                       DateFormat('MMM d, h:mm a').format(msg.createdAt),
-                      style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight, fontSize: 11),
+                      style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight), fontSize: 11),
                     ),
                   ],
                 ),
@@ -208,7 +208,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
                         : AppColors.backgroundLight,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: isAdmin ? AppColors.primary.withValues(alpha: 0.15) : AppColors.borderLight,
+                      color: isAdmin ? AppColors.primary.withValues(alpha: 0.15) : (Theme.of(context).brightness == Brightness.dark ? AppColors.borderDark : AppColors.borderLight),
                     ),
                   ),
                   child: Text(msg.message, style: AppTextStyles.body.copyWith(height: 1.5)),
@@ -273,7 +273,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
               ),
               child: Text(
                 'This ticket is closed and cannot receive new replies.',
-                style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight),
+                style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
               ),
             ),
           ] else ...[
@@ -436,7 +436,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
               const Spacer(),
               Text(
                 DateFormat('MMM d, y').format(evidence.submittedAt),
-                style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight, fontSize: 11),
+                style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight), fontSize: 11),
               ),
             ],
           ),
@@ -444,7 +444,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
           Text(evidence.description, style: AppTextStyles.body),
           if (evidence.attachmentUrls.isNotEmpty) ...[
             const SizedBox(height: 8),
-            Text('${evidence.attachmentUrls.length} attachment(s)', style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+            Text('${evidence.attachmentUrls.length} attachment(s)', style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
           ],
         ],
       ),
@@ -485,7 +485,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(ticket.userName, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600)),
-                  Text(ticket.userEmail, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                  Text(ticket.userEmail, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                 ],
               ),
             ],
@@ -682,7 +682,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
       children: [
         SizedBox(
           width: 120,
-          child: Text(label, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+          child: Text(label, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
         ),
         Expanded(child: Text(value, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500))),
       ],

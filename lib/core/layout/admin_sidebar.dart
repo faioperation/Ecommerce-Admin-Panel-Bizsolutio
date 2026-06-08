@@ -12,55 +12,106 @@ class AdminSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LayoutController layoutController = Get.find<LayoutController>();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Obx(() {
       final bool isCollapsed = layoutController.isSidebarCollapsed.value;
-      final double width = isCollapsed ? 80.0 : AppSpacing.sidebarWidth;
+      final double width = isCollapsed ? 72.0 : AppSpacing.sidebarWidth;
 
       return AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
+        duration: const Duration(milliseconds: 220),
+        curve: Curves.easeInOut,
         width: width,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          border: Border(right: BorderSide(color: Theme.of(context).dividerTheme.color ?? AppColors.borderLight)),
+          color: isDark ? AppColors.sidebarDark : AppColors.sidebarLight,
+          border: Border(
+            right: BorderSide(
+              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+            ),
+          ),
         ),
         child: Column(
           children: [
-            // Logo Area
-            Container(
+            // ── Logo Area ──
+            SizedBox(
               height: AppSpacing.headerHeight,
-              alignment: Alignment.center,
-              child: isCollapsed
-                  ? const Icon(Icons.local_shipping, color: AppColors.primary, size: 32)
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.local_shipping, color: AppColors.primary, size: 28),
-                        const SizedBox(width: 12),
-                        Text('Vango Live', style: AppTextStyles.h3.copyWith(color: AppColors.primary)),
-                      ],
-                    ),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 180),
+                child: isCollapsed
+                    ? Center(
+                        key: const ValueKey('icon'),
+                        child: Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(Icons.bolt, color: Colors.white, size: 20),
+                        ),
+                      )
+                    : Padding(
+                        key: const ValueKey('full'),
+                        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 32,
+                              height: 32,
+                              decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Icon(Icons.bolt, color: Colors.white, size: 18),
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              'Vango Admin',
+                              style: AppTextStyles.h5.copyWith(color: AppColors.primary),
+                            ),
+                          ],
+                        ),
+                      ),
+              ),
             ),
-            const Divider(height: 1, thickness: 1),
-            // Menu Items
+
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+            ),
+
+            // ── Menu Items ──
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm, horizontal: AppSpacing.xs),
                 children: [
-                  _SidebarItem(icon: Icons.dashboard, label: 'Dashboard', route: '/', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.people, label: 'Users', route: '/users', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.storefront, label: 'Sellers', route: '/sellers', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.inventory_2, label: 'Products', route: '/products', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.live_tv, label: 'Livestreams', route: '/livestreams', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.gavel, label: 'Auctions', route: '/auctions', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.shopping_cart, label: 'Orders', route: '/orders', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.account_balance_wallet, label: 'Wallets', route: '/wallets', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.flag, label: 'Reports', route: '/reports', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.support_agent, label: 'Support Tickets', route: '/support-tickets', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.notifications, label: 'Notifications', route: '/notifications', isCollapsed: isCollapsed),
-                  _SidebarItem(icon: Icons.bar_chart, label: 'Analytics', route: '/analytics', isCollapsed: isCollapsed),
-                  const Divider(),
-                  _SidebarItem(icon: Icons.settings, label: 'Settings', route: '/settings', isCollapsed: isCollapsed),
+                  _SectionLabel(label: 'Overview', isCollapsed: isCollapsed, isDark: isDark),
+                  _SidebarItem(icon: Icons.grid_view_rounded,      label: 'Dashboard',       route: '/',                  isCollapsed: isCollapsed),
+                  _SidebarItem(icon: Icons.bar_chart_rounded,      label: 'Analytics',       route: '/analytics',         isCollapsed: isCollapsed),
+
+                  _SectionLabel(label: 'Commerce', isCollapsed: isCollapsed, isDark: isDark),
+                  _SidebarItem(icon: Icons.people_alt_rounded,     label: 'Users',           route: '/users',             isCollapsed: isCollapsed),
+                  _SidebarItem(icon: Icons.storefront_rounded,     label: 'Sellers',         route: '/sellers',           isCollapsed: isCollapsed),
+                  _SidebarItem(icon: Icons.inventory_2_rounded,    label: 'Products',        route: '/products',          isCollapsed: isCollapsed),
+                  _SidebarItem(icon: Icons.shopping_bag_rounded,   label: 'Orders',          route: '/orders',            isCollapsed: isCollapsed),
+                  _SidebarItem(icon: Icons.account_balance_wallet_rounded, label: 'Wallets', route: '/wallets',           isCollapsed: isCollapsed),
+
+                  _SectionLabel(label: 'Media', isCollapsed: isCollapsed, isDark: isDark),
+                  _SidebarItem(icon: Icons.live_tv_rounded,        label: 'Livestreams',     route: '/livestreams',       isCollapsed: isCollapsed),
+                  _SidebarItem(icon: Icons.gavel_rounded,          label: 'Auctions',        route: '/auctions',          isCollapsed: isCollapsed),
+
+                  _SectionLabel(label: 'Support', isCollapsed: isCollapsed, isDark: isDark),
+                  _SidebarItem(icon: Icons.flag_rounded,           label: 'Reports',         route: '/reports',           isCollapsed: isCollapsed),
+                  _SidebarItem(icon: Icons.support_agent_rounded,  label: 'Support Tickets', route: '/support-tickets',   isCollapsed: isCollapsed),
+                  _SidebarItem(icon: Icons.notifications_rounded,  label: 'Notifications',   route: '/notifications',     isCollapsed: isCollapsed),
+
+                  Divider(
+                    height: AppSpacing.lg,
+                    thickness: 1,
+                    color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                  ),
+                  _SidebarItem(icon: Icons.settings_rounded,      label: 'Settings',        route: '/settings',          isCollapsed: isCollapsed),
                 ],
               ),
             ),
@@ -71,6 +122,46 @@ class AdminSidebar extends StatelessWidget {
   }
 }
 
+// ─────────────────────────────────────────────
+// Section Label
+// ─────────────────────────────────────────────
+class _SectionLabel extends StatelessWidget {
+  final String label;
+  final bool isCollapsed;
+  final bool isDark;
+
+  const _SectionLabel({required this.label, required this.isCollapsed, required this.isDark});
+
+  @override
+  Widget build(BuildContext context) {
+    if (isCollapsed) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Center(
+          child: Container(
+            width: 24,
+            height: 1,
+            color: isDark ? AppColors.borderDark : AppColors.borderLight,
+          ),
+        ),
+      );
+    }
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 16, 8, 4),
+      child: Text(
+        label.toUpperCase(),
+        style: AppTextStyles.overline.copyWith(
+          color: isDark ? AppColors.textTertiaryDark : AppColors.textTertiaryLight,
+          letterSpacing: 0.8,
+        ),
+      ),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────
+// Sidebar Item
+// ─────────────────────────────────────────────
 class _SidebarItem extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -87,47 +178,81 @@ class _SidebarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String currentRoute = GoRouterState.of(context).uri.toString();
-    final bool isSelected = currentRoute == route || (route != '/' && currentRoute.startsWith(route));
-    
-    final Color activeColor = AppColors.primary;
-    final Color inactiveColor = Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
+    final bool isSelected = currentRoute == route ||
+        (route != '/' && currentRoute.startsWith(route));
 
-    Widget item = isCollapsed
-        ? Tooltip(
-            message: label,
-            child: Icon(icon, color: isSelected ? activeColor : inactiveColor),
-          )
-        : Row(
-            children: [
-              Icon(icon, color: isSelected ? activeColor : inactiveColor),
-              const SizedBox(width: AppSpacing.md),
-              Text(
-                label,
-                style: AppTextStyles.body.copyWith(
-                  color: isSelected ? activeColor : inactiveColor,
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                ),
-              ),
-            ],
-          );
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return InkWell(
-      onTap: () {
-        context.go(route);
-        // If mobile drawer is open, close it
-        if (Scaffold.of(context).hasDrawer && Scaffold.of(context).isDrawerOpen) {
-          Get.find<LayoutController>().closeDrawer();
-        }
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 2),
-        padding: EdgeInsets.symmetric(vertical: AppSpacing.md, horizontal: isCollapsed ? 0 : AppSpacing.md),
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.primarySubtle.withValues(alpha: 0.5) : Colors.transparent,
+    final Color activeColor    = AppColors.primary;
+    final Color inactiveColor  = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+    final Color activeBg       = isDark ? AppColors.selectedDark : AppColors.selectedLight;
+    final Color hoverBg        = isDark ? AppColors.hoverDark     : AppColors.hoverLight;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 1),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(8),
+        child: InkWell(
+          onTap: () {
+            context.go(route);
+            if (Scaffold.of(context).hasDrawer && Scaffold.of(context).isDrawerOpen) {
+              Get.find<LayoutController>().closeDrawer();
+            }
+          },
           borderRadius: BorderRadius.circular(8),
+          hoverColor: isSelected ? activeBg : hoverBg,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 150),
+            padding: EdgeInsets.symmetric(
+              vertical: 9,
+              horizontal: isCollapsed ? 0 : 10,
+            ),
+            decoration: BoxDecoration(
+              color: isSelected ? activeBg : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: isCollapsed
+                ? Tooltip(
+                    message: label,
+                    preferBelow: false,
+                    child: Center(
+                      child: Icon(
+                        icon,
+                        color: isSelected ? activeColor : inactiveColor,
+                        size: 20,
+                      ),
+                    ),
+                  )
+                : Row(
+                    children: [
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 150),
+                        width: 3,
+                        height: 18,
+                        decoration: BoxDecoration(
+                          color: isSelected ? activeColor : Colors.transparent,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Icon(
+                        icon,
+                        color: isSelected ? activeColor : inactiveColor,
+                        size: 18,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        label,
+                        style: AppTextStyles.body.copyWith(
+                          color: isSelected ? activeColor : inactiveColor,
+                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+          ),
         ),
-        alignment: isCollapsed ? Alignment.center : Alignment.centerLeft,
-        child: item,
       ),
     );
   }

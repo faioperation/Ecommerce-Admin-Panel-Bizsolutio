@@ -40,11 +40,11 @@ class KycReviewCard extends StatelessWidget {
             style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: AppSpacing.sm),
-          _buildDocumentRow(Icons.badge_outlined, 'National ID / Passport', 'Verified'),
+          _buildDocumentRow(context, Icons.badge_outlined, 'National ID / Passport', 'Verified'),
           const SizedBox(height: AppSpacing.sm),
-          _buildDocumentRow(Icons.business_outlined, 'Business License', 'Pending Review'),
+          _buildDocumentRow(context, Icons.business_outlined, 'Business License', 'Pending Review'),
           const SizedBox(height: AppSpacing.sm),
-          _buildDocumentRow(Icons.account_balance_outlined, 'Bank Statement', 'Verified'),
+          _buildDocumentRow(context, Icons.account_balance_outlined, 'Bank Statement', 'Verified'),
           
           if (isPending) ...[
             const SizedBox(height: AppSpacing.xl),
@@ -98,17 +98,17 @@ class KycReviewCard extends StatelessWidget {
     );
   }
 
-  Widget _buildDocumentRow(IconData icon, String name, String docStatus) {
+  Widget _buildDocumentRow(BuildContext context, IconData icon, String name, String docStatus) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
         color: AppColors.backgroundLight,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.borderLight),
+        border: Border.all(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.borderDark : AppColors.borderLight)),
       ),
       child: Row(
         children: [
-          Icon(icon, color: AppColors.textSecondaryLight),
+          Icon(icon, color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
           const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Text(name, style: AppTextStyles.body),

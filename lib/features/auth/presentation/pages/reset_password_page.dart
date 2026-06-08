@@ -77,7 +77,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'Enter the code sent to \${widget.email} and your new password.',
-                      style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight),
+                      style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: AppSpacing.xxl),

@@ -69,7 +69,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'Enter your email address and we will send you instructions to reset your password.',
-                      style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight),
+                      style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: AppSpacing.xxl),

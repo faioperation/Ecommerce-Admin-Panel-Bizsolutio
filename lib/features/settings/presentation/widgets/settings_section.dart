@@ -45,7 +45,7 @@ class SettingsSection extends StatelessWidget {
                 children: [
                   Text(title, style: AppTextStyles.h4),
                   if (subtitle != null)
-                    Text(subtitle!, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                    Text(subtitle!, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                 ],
               ),
             ],
@@ -88,7 +88,7 @@ class SettingsFormRow extends StatelessWidget {
                 Text(label, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500)),
                 if (hint != null) ...[
                   const SizedBox(height: 2),
-                  Text(hint!, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                  Text(hint!, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                 ],
               ],
             ),
@@ -128,7 +128,7 @@ class SettingsToggleRow extends StatelessWidget {
               children: [
                 Text(label, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500)),
                 if (hint != null)
-                  Text(hint!, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                  Text(hint!, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
               ],
             ),
           ),

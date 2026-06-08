@@ -36,11 +36,11 @@ class ActivityFeedWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 4),
-                            Text(item.description, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                            Text(item.description, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                             const SizedBox(height: 4),
                             Text(
                               DateFormat('MMM d, h:mm a').format(item.timestamp),
-                              style: AppTextStyles.caption.copyWith(color: AppColors.textSecondaryLight),
+                              style: AppTextStyles.caption.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
                             ),
                           ],
                         ),

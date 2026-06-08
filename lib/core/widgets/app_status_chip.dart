@@ -7,49 +7,73 @@ enum AppStatusType { success, error, warning, info, standard }
 class AppStatusChip extends StatelessWidget {
   final String label;
   final AppStatusType type;
+  final bool dot;
 
   const AppStatusChip({
     super.key,
     required this.label,
     this.type = AppStatusType.standard,
+    this.dot = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     Color bgColor;
     Color textColor;
 
     switch (type) {
       case AppStatusType.success:
-        bgColor = AppColors.successSubtle;
+        bgColor   = isDark ? AppColors.successDark : AppColors.successLight;
         textColor = AppColors.success;
         break;
       case AppStatusType.error:
-        bgColor = AppColors.errorSubtle;
+        bgColor   = isDark ? AppColors.errorDark : AppColors.errorLight;
         textColor = AppColors.error;
         break;
       case AppStatusType.warning:
-        bgColor = AppColors.warningSubtle;
+        bgColor   = isDark ? AppColors.warningDark : AppColors.warningLight;
         textColor = AppColors.warning;
         break;
       case AppStatusType.info:
-        bgColor = AppColors.infoSubtle;
+        bgColor   = isDark ? AppColors.infoDark : AppColors.infoLight;
         textColor = AppColors.info;
         break;
       case AppStatusType.standard:
-        bgColor = Theme.of(context).colorScheme.surfaceContainerHighest;
-        textColor = Theme.of(context).colorScheme.onSurface;
+        bgColor   = Theme.of(context).colorScheme.surfaceContainerHighest;
+        textColor = Theme.of(context).colorScheme.onSurfaceVariant;
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
       ),
-      child: Text(
-        label.toUpperCase(),
-        style: AppTextStyles.overline.copyWith(color: textColor, fontWeight: FontWeight.w600),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (dot) ...[
+            Container(
+              width: 6,
+              height: 6,
+              decoration: BoxDecoration(
+                color: textColor,
+                shape: BoxShape.circle,
+              ),
+            ),
+            const SizedBox(width: 6),
+          ],
+          Text(
+            label.toUpperCase(),
+            style: AppTextStyles.overline.copyWith(
+              color: textColor,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.6,
+            ),
+          ),
+        ],
       ),
     );
   }

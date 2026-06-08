@@ -232,14 +232,14 @@ class _LivestreamSettingsPanelState extends State<LivestreamSettingsPanel> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 220,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Banned Keywords', style: TextStyle(fontWeight: FontWeight.w500)),
-                        SizedBox(height: 2),
-                        Text('Messages containing these words are auto-blocked', style: TextStyle(fontSize: 12, color: AppColors.textSecondaryLight)),
+                        const Text('Banned Keywords', style: TextStyle(fontWeight: FontWeight.w500)),
+                        const SizedBox(height: 2),
+                        Text('Messages containing these words are auto-blocked', style: TextStyle(fontSize: 12, color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                       ],
                     ),
                   ),
@@ -267,7 +267,7 @@ class _LivestreamSettingsPanelState extends State<LivestreamSettingsPanel> {
                         ),
                         const SizedBox(height: 8),
                         if (_bannedKeywords.isEmpty)
-                          const Text('No banned keywords added.', style: TextStyle(color: AppColors.textSecondaryLight)),
+                          Text('No banned keywords added.', style: TextStyle(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
                         Wrap(
                           spacing: 6,
                           runSpacing: 6,

@@ -90,8 +90,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                         fit: BoxFit.cover,
                                         errorBuilder: (context, error, stackTrace) => Container(
                                           width: 300,
-                                          color: AppColors.borderLight,
-                                          child: const Icon(Icons.image_not_supported, size: 50, color: AppColors.textSecondaryLight),
+                                          color: (Theme.of(context).brightness == Brightness.dark ? AppColors.borderDark : AppColors.borderLight),
+                                          child: Icon(Icons.image_not_supported, size: 50, color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
                                         ),
                                       ),
                                     ),
@@ -250,7 +250,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight)),
+          Text(label, style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
           Text(value, style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600)),
         ],
       ),
@@ -266,9 +266,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppTextStyles.h5.copyWith(color: isDestructive ? AppColors.error : AppColors.textPrimaryLight)),
+                Text(title, style: AppTextStyles.h5.copyWith(color: isDestructive ? AppColors.error : (Theme.of(context).brightness == Brightness.dark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight))),
                 const SizedBox(height: 4),
-                Text(description, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                Text(description, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
               ],
             ),
           ),

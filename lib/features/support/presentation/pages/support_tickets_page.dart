@@ -42,7 +42,7 @@ class _SupportTicketsPageState extends State<SupportTicketsPage> {
             children: [
               Text('Support Tickets', style: AppTextStyles.h2),
               const SizedBox(height: 4),
-              Text('Manage customer support requests and refund disputes.', style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+              Text('Manage customer support requests and refund disputes.', style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
               const SizedBox(height: AppSpacing.lg),
               _buildStatsRow(),
               const SizedBox(height: AppSpacing.lg),
@@ -84,7 +84,7 @@ class _SupportTicketsPageState extends State<SupportTicketsPage> {
         const SizedBox(width: AppSpacing.md),
         _statCard('Escalated', controller.escalatedCount.value, AppColors.error, Icons.priority_high_rounded),
         const SizedBox(width: AppSpacing.md),
-        _statCard('Closed', controller.closedCount.value, AppColors.textSecondaryLight, Icons.check_circle_outline),
+        _statCard('Closed', controller.closedCount.value, (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight), Icons.check_circle_outline),
         const SizedBox(width: AppSpacing.md),
         _statCard('Total', controller.totalCount.value, AppColors.primary, Icons.support_agent),
       ],
@@ -115,7 +115,7 @@ class _SupportTicketsPageState extends State<SupportTicketsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('$count', style: AppTextStyles.h3.copyWith(color: color)),
-                Text(label, style: AppTextStyles.bodySm.copyWith(color: AppColors.textSecondaryLight)),
+                Text(label, style: AppTextStyles.bodySm.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight))),
               ],
             ),
           ],
@@ -140,13 +140,13 @@ class _SupportTicketsPageState extends State<SupportTicketsPage> {
                 color: isSelected ? AppColors.primary : Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: isSelected ? AppColors.primary : AppColors.borderLight,
+                  color: isSelected ? AppColors.primary : (Theme.of(context).brightness == Brightness.dark ? AppColors.borderDark : AppColors.borderLight),
                 ),
               ),
               child: Text(
                 labels[i],
                 style: AppTextStyles.bodySm.copyWith(
-                  color: isSelected ? Colors.white : AppColors.textSecondaryLight,
+                  color: isSelected ? Colors.white : (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight),
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),
               ),

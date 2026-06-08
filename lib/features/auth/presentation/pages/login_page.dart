@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       'Welcome back! Please enter your details.',
-                      style: AppTextStyles.body.copyWith(color: AppColors.textSecondaryLight),
+                      style: AppTextStyles.body.copyWith(color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: AppSpacing.xxl),

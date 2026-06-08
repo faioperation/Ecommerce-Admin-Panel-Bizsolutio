@@ -49,8 +49,8 @@ class ProductsTableSource extends AppTableSource<ProductEntity> {
                     errorBuilder: (context, error, stackTrace) => Container(
                       width: 40,
                       height: 40,
-                      color: AppColors.borderLight,
-                      child: const Icon(Icons.image_not_supported, size: 20, color: AppColors.textSecondaryLight),
+                      color: (Theme.of(context).brightness == Brightness.dark ? AppColors.borderDark : AppColors.borderLight),
+                      child: Icon(Icons.image_not_supported, size: 20, color: (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight)),
                     ),
                   ),
                 ),
@@ -92,7 +92,7 @@ class ProductsTableSource extends AppTableSource<ProductEntity> {
             child: Text(
               stock.toString(),
               style: AppTextStyles.body.copyWith(
-                color: stock == 0 ? AppColors.error : AppColors.textPrimaryLight,
+                color: stock == 0 ? AppColors.error : (Theme.of(context).brightness == Brightness.dark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight),
                 fontWeight: stock == 0 ? FontWeight.bold : FontWeight.normal,
               ),
             ),
