@@ -20,6 +20,7 @@ class _ReportsPageState extends State<ReportsPage> {
     super.initState();
     _source = ReportsTableSource(context);
     final controller = Get.find<ReportsController>();
+    controller.onPageActivated(); // Trigger lifecycle fetch
     ever(controller.reports, (reports) {
       _source.setTotalCount(controller.totalCount.value);
       _source.buildDataGridRows(reports);
@@ -45,37 +46,37 @@ class _ReportsPageState extends State<ReportsPage> {
             columns: [
               GridColumn(
                 columnName: 'id',
-                width: 100,
+                minimumWidth: 100,
                 label: _buildColumnHeader('ID'),
               ),
               GridColumn(
                 columnName: 'reporter',
-                width: 180,
+                minimumWidth: 180,
                 label: _buildColumnHeader('Reporter'),
               ),
               GridColumn(
                 columnName: 'target',
-                width: 250,
+                minimumWidth: 250,
                 label: _buildColumnHeader('Target'),
               ),
               GridColumn(
                 columnName: 'reason',
-                width: 200,
+                minimumWidth: 200,
                 label: _buildColumnHeader('Reason'),
               ),
               GridColumn(
                 columnName: 'date',
-                width: 150,
+                minimumWidth: 150,
                 label: _buildColumnHeader('Date'),
               ),
               GridColumn(
                 columnName: 'status',
-                width: 130,
+                minimumWidth: 130,
                 label: _buildColumnHeader('Status'),
               ),
               GridColumn(
                 columnName: 'actions',
-                width: 80,
+                minimumWidth: 80,
                 label: Container(
                   alignment: Alignment.center,
                   child: const Text('Actions', style: TextStyle(fontWeight: FontWeight.bold)),

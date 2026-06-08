@@ -22,6 +22,8 @@ class _SellersPageState extends State<SellersPage> {
     _source = SellersTableSource(context);
     // Bind source updates to controller changes
     final controller = Get.find<SellersController>();
+    controller.onPageActivated(); // Trigger lifecycle fetch
+    
     ever(controller.sellers, (sellers) {
       _source.setTotalCount(controller.totalCount);
       _source.buildDataGridRows(sellers);
@@ -59,7 +61,7 @@ class _SellersPageState extends State<SellersPage> {
             columns: [
               GridColumn(
                 columnName: 'id',
-                width: 100,
+                minimumWidth: 100,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -68,7 +70,7 @@ class _SellersPageState extends State<SellersPage> {
               ),
               GridColumn(
                 columnName: 'shop',
-                width: 250,
+                minimumWidth: 250,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -77,7 +79,7 @@ class _SellersPageState extends State<SellersPage> {
               ),
               GridColumn(
                 columnName: 'owner',
-                width: 150,
+                minimumWidth: 150,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -86,7 +88,7 @@ class _SellersPageState extends State<SellersPage> {
               ),
               GridColumn(
                 columnName: 'kyc',
-                width: 130,
+                minimumWidth: 130,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -95,7 +97,7 @@ class _SellersPageState extends State<SellersPage> {
               ),
               GridColumn(
                 columnName: 'revenue',
-                width: 120,
+                minimumWidth: 120,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -104,7 +106,7 @@ class _SellersPageState extends State<SellersPage> {
               ),
               GridColumn(
                 columnName: 'status',
-                width: 130,
+                minimumWidth: 130,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -113,7 +115,7 @@ class _SellersPageState extends State<SellersPage> {
               ),
               GridColumn(
                 columnName: 'actions',
-                width: 80,
+                minimumWidth: 80,
                 label: Container(
                   alignment: Alignment.center,
                   child: const Text('Actions', style: TextStyle(fontWeight: FontWeight.bold)),

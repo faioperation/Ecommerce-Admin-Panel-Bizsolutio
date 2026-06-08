@@ -23,6 +23,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     super.initState();
     _source = NotificationsTableSource(context);
     final controller = Get.find<NotificationsController>();
+    controller.onPageActivated(); // Trigger lifecycle fetch
     ever(controller.notifications, (notifications) {
       _source.setTotalCount(controller.totalCount.value);
       _source.buildDataGridRows(notifications);
@@ -59,32 +60,32 @@ class _NotificationsPageState extends State<NotificationsPage> {
             columns: [
               GridColumn(
                 columnName: 'title',
-                width: 250,
+                minimumWidth: 250,
                 label: _buildColumnHeader('Title'),
               ),
               GridColumn(
                 columnName: 'type',
-                width: 180,
+                minimumWidth: 180,
                 label: _buildColumnHeader('Type'),
               ),
               GridColumn(
                 columnName: 'audience',
-                width: 150,
+                minimumWidth: 150,
                 label: _buildColumnHeader('Audience'),
               ),
               GridColumn(
                 columnName: 'scheduled',
-                width: 200,
+                minimumWidth: 200,
                 label: _buildColumnHeader('Scheduled For'),
               ),
               GridColumn(
                 columnName: 'status',
-                width: 120,
+                minimumWidth: 120,
                 label: _buildColumnHeader('Status'),
               ),
               GridColumn(
                 columnName: 'actions',
-                width: 160,
+                minimumWidth: 160,
                 label: Container(
                   alignment: Alignment.center,
                   child: const Text('Actions', style: TextStyle(fontWeight: FontWeight.bold)),

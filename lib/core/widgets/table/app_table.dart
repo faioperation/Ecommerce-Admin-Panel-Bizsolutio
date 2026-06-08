@@ -56,21 +56,29 @@ class _AppTableState extends State<AppTable> {
           _buildHeader(context),
           const Divider(height: 1, thickness: 1),
           Expanded(
-            child: SfDataGrid(
-              key: _key,
-              source: widget.source,
-              columns: widget.columns,
-              controller: _internalController,
-              allowSorting: true,
-              allowMultiColumnSorting: true,
-              allowFiltering: false, // We use external custom filters
-              selectionMode: SelectionMode.multiple,
-              showCheckboxColumn: widget.showCheckboxColumn,
-              headerGridLinesVisibility: GridLinesVisibility.none,
-              gridLinesVisibility: GridLinesVisibility.horizontal,
-              rowHeight: 60,
-              headerRowHeight: 56,
-              columnWidthMode: ColumnWidthMode.fill,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final widthMode = constraints.maxWidth > 1024
+                    ? ColumnWidthMode.fill
+                    : ColumnWidthMode.auto;
+
+                return SfDataGrid(
+                  key: _key,
+                  source: widget.source,
+                  columns: widget.columns,
+                  controller: _internalController,
+                  allowSorting: true,
+                  allowMultiColumnSorting: true,
+                  allowFiltering: false, // We use external custom filters
+                  selectionMode: SelectionMode.multiple,
+                  showCheckboxColumn: widget.showCheckboxColumn,
+                  headerGridLinesVisibility: GridLinesVisibility.none,
+                  gridLinesVisibility: GridLinesVisibility.horizontal,
+                  rowHeight: 60,
+                  headerRowHeight: 56,
+                  columnWidthMode: widthMode,
+                );
+              },
             ),
           ),
           const Divider(height: 1, thickness: 1),

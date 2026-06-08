@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import '../../domain/entities/notification_entity.dart';
 import '../../domain/repositories/notification_repository.dart';
 
-class NotificationsController extends GetxController {
+import '../../../../core/mixins/page_lifecycle_mixin.dart';
+
+class NotificationsController extends GetxController with PageLifecycleMixin {
   final NotificationRepository _repository;
 
   NotificationsController(this._repository);
 
   final RxList<NotificationEntity> notifications = <NotificationEntity>[].obs;
-  final RxBool isLoading = false.obs;
-  final RxString error = ''.obs;
 
   int _currentPage = 1;
   final int _limit = 15;
@@ -19,43 +19,33 @@ class NotificationsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _loadTotalCount();
-    fetchNotifications(isRefresh: true);
+    // Replaced by onPageActivated in the UI
   }
 
   Future<void> _loadTotalCount() async {
     totalCount.value = await _repository.getTotalCount();
   }
 
-  Future<void> fetchNotifications({bool isRefresh = false}) async {
-    if (isLoading.value) return;
-
-    try {
-      if (isRefresh) {
-        _currentPage = 1;
-        notifications.clear();
-      }
-
-      isLoading.value = true;
-      error.value = '';
-
-      final newNotifications = await _repository.getNotifications(
-        page: _currentPage,
-        limit: _limit,
-      );
-
-      if (isRefresh) {
-        notifications.value = newNotifications;
-      } else {
-        notifications.addAll(newNotifications);
-      }
-
-      _currentPage++;
-    } catch (e) {
-      error.value = e.toString();
-    } finally {
-      isLoading.value = false;
+  @override
+  Future<void> fetchData({bool isRefresh = false}) async {
+    if (isRefresh) {
+      _currentPage = 1;
+      notifications.clear();
+      await _loadTotalCount();
     }
+
+    final newNotifications = await _repository.getNotifications(
+      page: _currentPage,
+      limit: _limit,
+    );
+
+    if (isRefresh) {
+      notifications.value = newNotifications;
+    } else {
+      notifications.addAll(newNotifications);
+    }
+
+    _currentPage++;
   }
 
   Future<void> deleteNotification(String id) async {

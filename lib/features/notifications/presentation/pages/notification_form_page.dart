@@ -240,7 +240,7 @@ class _NotificationFormPageState extends State<NotificationFormPage> {
                                 if (_formKey.currentState!.validate()) {
                                   final success = await controller.saveNotification();
                                   if (success) {
-                                    Get.find<NotificationsController>().fetchNotifications(isRefresh: true);
+                                    Get.find<NotificationsController>().onPageActivated(forceRefresh: true);
                                     if (context.mounted) {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(content: Text('Notification saved successfully'), backgroundColor: Colors.green),

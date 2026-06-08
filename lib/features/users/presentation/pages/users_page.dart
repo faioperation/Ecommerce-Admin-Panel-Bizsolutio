@@ -23,6 +23,8 @@ class _UsersPageState extends State<UsersPage> {
     _source = UsersTableSource(context);
     // Bind source updates to controller changes
     final controller = Get.find<UsersController>();
+    controller.onPageActivated(); // Trigger lifecycle fetch
+    
     ever(controller.users, (users) {
       _source.setTotalCount(controller.totalCount);
       _source.buildDataGridRows(users);
@@ -57,7 +59,7 @@ class _UsersPageState extends State<UsersPage> {
             columns: [
               GridColumn(
                 columnName: 'id',
-                width: 100,
+                minimumWidth: 100,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -66,7 +68,7 @@ class _UsersPageState extends State<UsersPage> {
               ),
               GridColumn(
                 columnName: 'user',
-                width: 250,
+                minimumWidth: 250,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -75,7 +77,7 @@ class _UsersPageState extends State<UsersPage> {
               ),
               GridColumn(
                 columnName: 'phone',
-                width: 150,
+                minimumWidth: 150,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -84,7 +86,7 @@ class _UsersPageState extends State<UsersPage> {
               ),
               GridColumn(
                 columnName: 'wallet',
-                width: 120,
+                minimumWidth: 120,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -93,7 +95,7 @@ class _UsersPageState extends State<UsersPage> {
               ),
               GridColumn(
                 columnName: 'status',
-                width: 130,
+                minimumWidth: 130,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -102,7 +104,7 @@ class _UsersPageState extends State<UsersPage> {
               ),
               GridColumn(
                 columnName: 'joinedAt',
-                width: 130,
+                minimumWidth: 130,
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   alignment: Alignment.centerLeft,
@@ -111,7 +113,7 @@ class _UsersPageState extends State<UsersPage> {
               ),
               GridColumn(
                 columnName: 'actions',
-                width: 80,
+                minimumWidth: 80,
                 label: Container(
                   alignment: Alignment.center,
                   child: const Text('Actions', style: TextStyle(fontWeight: FontWeight.bold)),

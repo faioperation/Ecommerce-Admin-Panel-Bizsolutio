@@ -20,7 +20,10 @@ import '../../features/notifications/presentation/pages/notification_form_page.d
 import '../../features/support/presentation/pages/support_tickets_page.dart';
 import '../../features/support/presentation/pages/ticket_details_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
-
+import '../../features/orders/presentation/pages/orders_page.dart';
+import '../../features/wallets/presentation/pages/wallets_page.dart';
+import '../../features/analytics/presentation/pages/analytics_page.dart';
+import '../../features/auctions/presentation/pages/auctions_page.dart';
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -123,17 +126,17 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/auctions',
           name: RouteNames.auctions,
-          builder: (context, state) => _placeholderPage('Auctions Management'),
+          builder: (context, state) => const AuctionsPage(),
         ),
         GoRoute(
           path: '/orders',
           name: RouteNames.orders,
-          builder: (context, state) => _placeholderPage('Orders Management'),
+          builder: (context, state) => const OrdersPage(),
         ),
         GoRoute(
           path: '/wallets',
           name: RouteNames.wallets,
-          builder: (context, state) => _placeholderPage('Wallets & Transactions'),
+          builder: (context, state) => const WalletsPage(),
         ),
         GoRoute(
           path: '/reports',
@@ -168,7 +171,7 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/analytics',
           name: RouteNames.analytics,
-          builder: (context, state) => _placeholderPage('Analytics'),
+          builder: (context, state) => const AnalyticsPage(),
         ),
         GoRoute(
           path: '/cms',

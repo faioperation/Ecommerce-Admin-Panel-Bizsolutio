@@ -21,6 +21,8 @@ class _ProductsPageState extends State<ProductsPage> {
     super.initState();
     _source = ProductsTableSource(context);
     final controller = Get.find<ProductsController>();
+    controller.onPageActivated(); // Trigger lifecycle fetch
+    
     ever(controller.products, (products) {
       _source.setTotalCount(controller.totalCount.value);
       _source.buildDataGridRows(products);
@@ -62,42 +64,42 @@ class _ProductsPageState extends State<ProductsPage> {
             columns: [
               GridColumn(
                 columnName: 'id',
-                width: 100,
+                minimumWidth: 100,
                 label: _buildColumnHeader('ID'),
               ),
               GridColumn(
                 columnName: 'product',
-                width: 300,
+                minimumWidth: 300,
                 label: _buildColumnHeader('Product'),
               ),
               GridColumn(
                 columnName: 'category',
-                width: 150,
+                minimumWidth: 150,
                 label: _buildColumnHeader('Category'),
               ),
               GridColumn(
                 columnName: 'price',
-                width: 120,
+                minimumWidth: 120,
                 label: _buildColumnHeader('Price'),
               ),
               GridColumn(
                 columnName: 'stock',
-                width: 100,
+                minimumWidth: 100,
                 label: _buildColumnHeader('Stock'),
               ),
               GridColumn(
                 columnName: 'seller',
-                width: 180,
+                minimumWidth: 180,
                 label: _buildColumnHeader('Seller'),
               ),
               GridColumn(
                 columnName: 'status',
-                width: 130,
+                minimumWidth: 130,
                 label: _buildColumnHeader('Status'),
               ),
               GridColumn(
                 columnName: 'actions',
-                width: 80,
+                minimumWidth: 80,
                 label: Container(
                   alignment: Alignment.center,
                   child: const Text('Actions', style: TextStyle(fontWeight: FontWeight.bold)),
