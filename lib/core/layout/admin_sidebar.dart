@@ -40,36 +40,23 @@ class AdminSidebar extends StatelessWidget {
                 child: isCollapsed
                     ? Center(
                         key: const ValueKey('icon'),
-                        child: Container(
-                          width: 36,
-                          height: 36,
-                          decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: const Icon(Icons.bolt, color: Colors.white, size: 20),
+                        child: Image.asset(
+                          'assets/images/client_logo.png',
+                          width: 46,
+                          height: 46,
+                          fit: BoxFit.contain,
                         ),
                       )
                     : Padding(
                         key: const ValueKey('full'),
                         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 32,
-                              height: 32,
-                              decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: const Icon(Icons.bolt, color: Colors.white, size: 18),
-                            ),
-                            const SizedBox(width: 10),
-                            Text(
-                              'Vango Admin',
-                              style: AppTextStyles.h5.copyWith(color: AppColors.primary),
-                            ),
-                          ],
+                        child: Center(
+                          child: Image.asset(
+                            'assets/images/client_logo.png',
+                            width: 180,
+                            height: 56,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
               ),
