@@ -10,7 +10,7 @@ class DashboardController extends GetxController {
 
   final Rx<DashboardStats?> stats = Rx<DashboardStats?>(null);
   final RxList<ActivityFeedItem> recentActivity = <ActivityFeedItem>[].obs;
-  final RxList<Map<String, dynamic>> revenueData = <Map<String, dynamic>>[].obs;
+  final RxList<Map<String, dynamic>> ordersOverviewData = <Map<String, dynamic>>[].obs;
   final RxList<Map<String, dynamic>> userGrowthData = <Map<String, dynamic>>[].obs;
   final RxBool isLoading = true.obs;
   final RxString error = ''.obs;
@@ -29,13 +29,13 @@ class DashboardController extends GetxController {
       final results = await Future.wait([
         _repository.getStats(),
         _repository.getRecentActivity(),
-        _repository.getRevenueData(),
+        _repository.getOrdersOverviewData(),
         _repository.getUserGrowthData(),
       ]);
 
       stats.value = results[0] as DashboardStats;
       recentActivity.value = results[1] as List<ActivityFeedItem>;
-      revenueData.value = results[2] as List<Map<String, dynamic>>;
+      ordersOverviewData.value = results[2] as List<Map<String, dynamic>>;
       userGrowthData.value = results[3] as List<Map<String, dynamic>>;
     } catch (e) {
       error.value = e.toString();

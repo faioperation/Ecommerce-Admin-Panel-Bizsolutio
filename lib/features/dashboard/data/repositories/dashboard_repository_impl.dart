@@ -31,22 +31,22 @@ class DashboardRepositoryImpl implements DashboardRepository {
     await Future.delayed(const Duration(milliseconds: 600));
     return [
       ActivityFeedModel(id: '1', title: 'New Seller Registered', description: 'TechStore joined the platform.', timestamp: DateTime.now().subtract(const Duration(minutes: 5)), type: 'seller'),
-      ActivityFeedModel(id: '2', title: 'Livestream Started', description: 'GadgetGuru is live now.', timestamp: DateTime.now().subtract(const Duration(minutes: 15)), type: 'livestream'),
+      ActivityFeedModel(id: '2', title: 'New User Joined', description: 'John Doe created an account.', timestamp: DateTime.now().subtract(const Duration(minutes: 15)), type: 'user'),
       ActivityFeedModel(id: '3', title: 'Large Order Placed', description: 'Order #4829 for ${CurrencyFormatter.format(1200, decimalDigits: 0)}.', timestamp: DateTime.now().subtract(const Duration(hours: 1)), type: 'order'),
-      ActivityFeedModel(id: '4', title: 'Auction Ended', description: 'Vintage Rolex sold for ${CurrencyFormatter.format(8500, decimalDigits: 0)}.', timestamp: DateTime.now().subtract(const Duration(hours: 2)), type: 'auction'),
+      ActivityFeedModel(id: '4', title: 'Product Added', description: 'TechStore added "Wireless Earbuds".', timestamp: DateTime.now().subtract(const Duration(hours: 2)), type: 'product'),
     ];
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getRevenueData() async {
+  Future<List<Map<String, dynamic>>> getOrdersOverviewData() async {
     await Future.delayed(const Duration(milliseconds: 400));
     return [
-      {'month': 'Jan', 'revenue': 35000},
-      {'month': 'Feb', 'revenue': 28000},
-      {'month': 'Mar', 'revenue': 34000},
-      {'month': 'Apr', 'revenue': 32000},
-      {'month': 'May', 'revenue': 40000},
-      {'month': 'Jun', 'revenue': 48000},
+      {'month': 'Jan', 'orders': 120},
+      {'month': 'Feb', 'orders': 150},
+      {'month': 'Mar', 'orders': 210},
+      {'month': 'Apr', 'orders': 180},
+      {'month': 'May', 'orders': 250},
+      {'month': 'Jun', 'orders': 320},
     ];
   }
 

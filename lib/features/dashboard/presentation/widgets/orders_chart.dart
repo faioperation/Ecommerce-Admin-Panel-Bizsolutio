@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../../../../core/controllers/currency_controller.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/app_card.dart';
 
-class RevenueChart extends StatelessWidget {
+class OrdersChart extends StatelessWidget {
   final List<Map<String, dynamic>> data;
 
-  const RevenueChart({super.key, required this.data});
+  const OrdersChart({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +34,11 @@ class RevenueChart extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Revenue Overview', style: AppTextStyles.h4.copyWith(
+                  Text('Orders Overview', style: AppTextStyles.h4.copyWith(
                     color: isDark ? AppColors.textPrimaryDark : (Theme.of(context).brightness == Brightness.dark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight),
                   )),
                   const SizedBox(height: 2),
-                  Text('Monthly revenue trend', style: AppTextStyles.caption.copyWith(
+                  Text('Monthly orders trend', style: AppTextStyles.caption.copyWith(
                     color: isDark ? AppColors.textTertiaryDark : (Theme.of(context).brightness == Brightness.dark ? AppColors.textTertiaryDark : AppColors.textTertiaryLight),
                   )),
                 ],
@@ -78,10 +76,6 @@ class RevenueChart extends StatelessWidget {
               ),
               primaryYAxis: NumericAxis(
                 axisLine: const AxisLine(width: 0),
-                numberFormat: NumberFormat.currency(
-                  symbol: CurrencyController.to.symbol,
-                  decimalDigits: 0,
-                ),
                 majorTickLines: const MajorTickLines(size: 0),
                 labelStyle: axisLabelStyle,
                 majorGridLines: MajorGridLines(
@@ -102,30 +96,20 @@ class RevenueChart extends StatelessWidget {
                 elevation: 8,
               ),
               series: <CartesianSeries>[
-                SplineAreaSeries<Map<String, dynamic>, String>(
+                ColumnSeries<Map<String, dynamic>, String>(
                   dataSource: data,
                   xValueMapper: (item, _) => item['month'] as String,
-                  yValueMapper: (item, _) => item['revenue'] as num,
-                  borderColor: AppColors.primary,
-                  borderWidth: 2.5,
-                  name: 'Revenue',
-                  splineType: SplineType.monotonic,
+                  yValueMapper: (item, _) => item['orders'] as num,
+                  name: 'Orders',
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
+                  width: 0.6,
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.primary.withValues(alpha: isDark ? 0.25 : 0.18),
-                      AppColors.primary.withValues(alpha: 0.0),
+                      AppColors.info,
+                      AppColors.info.withValues(alpha: 0.7),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                  ),
-                  markerSettings: MarkerSettings(
-                    isVisible: true,
-                    height: 6,
-                    width: 6,
-                    borderWidth: 2,
-                    borderColor: AppColors.primary,
-                    color: isDark ? AppColors.cardDark : Colors.white,
-                    shape: DataMarkerType.circle,
                   ),
                 ),
               ],

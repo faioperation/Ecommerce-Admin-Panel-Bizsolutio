@@ -32,13 +32,30 @@ class UserGrowthChart extends StatelessWidget {
               ),
               tooltipBehavior: TooltipBehavior(enable: true),
               series: <CartesianSeries>[
-                ColumnSeries<Map<String, dynamic>, String>(
+                SplineAreaSeries<Map<String, dynamic>, String>(
                   dataSource: data,
                   xValueMapper: (Map<String, dynamic> item, _) => item['month'] as String,
                   yValueMapper: (Map<String, dynamic> item, _) => item['users'] as num,
-                  color: AppColors.chartPalette[1], // Emerald
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
                   name: 'Users',
+                  borderColor: AppColors.chartPalette[1],
+                  borderWidth: 2.5,
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.chartPalette[1].withValues(alpha: 0.25),
+                      AppColors.chartPalette[1].withValues(alpha: 0.0),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  markerSettings: MarkerSettings(
+                    isVisible: true,
+                    height: 6,
+                    width: 6,
+                    borderWidth: 2,
+                    borderColor: AppColors.chartPalette[1],
+                    color: Theme.of(context).brightness == Brightness.dark ? AppColors.cardDark : Colors.white,
+                    shape: DataMarkerType.circle,
+                  ),
                 )
               ],
             ),

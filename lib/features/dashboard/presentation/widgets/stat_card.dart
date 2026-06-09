@@ -29,16 +29,16 @@ class StatCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            color.withValues(alpha: isDark ? 0.15 : 0.08),
-            color.withValues(alpha: isDark ? 0.05 : 0.01),
+            color,
+            color.withValues(alpha: 0.7),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: color.withValues(alpha: isDark ? 0.3 : 0.2),
-          width: 1.5,
+          color: color.withValues(alpha: 0.5),
+          width: 1,
         ),
         boxShadow: [
           BoxShadow(
@@ -63,7 +63,7 @@ class StatCard extends StatelessWidget {
                     Text(
                       title,
                       style: AppTextStyles.caption.copyWith(
-                        color: isDark ? AppColors.textSecondaryDark : (Theme.of(context).brightness == Brightness.dark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight),
+                        color: Colors.white.withValues(alpha: 0.9),
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.3,
                       ),
@@ -77,7 +77,7 @@ class StatCard extends StatelessWidget {
                       child: Text(
                         value,
                         style: AppTextStyles.h2.copyWith(
-                          color: isDark ? AppColors.textPrimaryDark : (Theme.of(context).brightness == Brightness.dark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight),
+                          color: Colors.white,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -90,10 +90,10 @@ class StatCard extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: color.withValues(alpha: isDark ? 0.15 : 0.1),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(icon, color: color, size: 20),
+                child: Icon(icon, color: Colors.white, size: 20),
               ),
             ],
           ),
@@ -102,7 +102,7 @@ class StatCard extends StatelessWidget {
             const SizedBox(height: AppSpacing.sm),
             Container(
               height: 1,
-              color: isDark ? AppColors.borderDark : (Theme.of(context).brightness == Brightness.dark ? AppColors.borderDark : AppColors.borderLight),
+              color: Colors.white.withValues(alpha: 0.2),
             ),
             const SizedBox(height: AppSpacing.sm),
             Row(
@@ -110,8 +110,7 @@ class StatCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: (isPositiveTrend ? AppColors.success : AppColors.error)
-                        .withValues(alpha: isDark ? 0.15 : 0.1),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
@@ -120,13 +119,13 @@ class StatCard extends StatelessWidget {
                       Icon(
                         isPositiveTrend ? Icons.trending_up_rounded : Icons.trending_down_rounded,
                         size: 12,
-                        color: isPositiveTrend ? AppColors.success : AppColors.error,
+                        color: Colors.white,
                       ),
                       const SizedBox(width: 3),
                       Text(
                         trend!,
                         style: AppTextStyles.caption.copyWith(
-                          color: isPositiveTrend ? AppColors.success : AppColors.error,
+                          color: Colors.white,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -138,7 +137,7 @@ class StatCard extends StatelessWidget {
                   child: Text(
                     'vs last month',
                     style: AppTextStyles.caption.copyWith(
-                      color: isDark ? AppColors.textTertiaryDark : (Theme.of(context).brightness == Brightness.dark ? AppColors.textTertiaryDark : AppColors.textTertiaryLight),
+                      color: Colors.white.withValues(alpha: 0.8),
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

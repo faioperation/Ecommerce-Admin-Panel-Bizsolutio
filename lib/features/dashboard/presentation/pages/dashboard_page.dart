@@ -11,10 +11,9 @@ import '../../../../core/widgets/app_empty_state.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../controllers/dashboard_controller.dart';
 import '../widgets/stat_card.dart';
-import '../widgets/revenue_chart.dart';
+import '../widgets/orders_chart.dart';
 import '../widgets/user_growth_chart.dart';
 import '../widgets/activity_feed.dart';
-import '../widgets/quick_actions.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -47,7 +46,7 @@ class DashboardPage extends StatelessWidget {
       final stats = controller.stats.value;
       if (stats == null) return const SizedBox.shrink();
 
-      final int statColumns = isMobile ? 2 : (isTablet ? 3 : 6);
+      final int statColumns = isMobile ? 1 : 3;
 
       return SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.contentPadding),
@@ -91,9 +90,9 @@ class DashboardPage extends StatelessWidget {
                 crossAxisCount: statColumns,
                 crossAxisSpacing: AppSpacing.md,
                 mainAxisSpacing: AppSpacing.md,
-                childAspectRatio: statColumns == 6 ? 1.3 : 1.2,
+                mainAxisExtent: 140,
               ),
-              itemCount: 6,
+              itemCount: 3,
               itemBuilder: (context, index) {
                 return [
                   StatCard(
@@ -113,31 +112,7 @@ class DashboardPage extends StatelessWidget {
                     isPositiveTrend: true,
                   ),
                   StatCard(
-                    title: 'Active Livestreams',
-                    value: stats.activeLivestreams.toString(),
-                    icon: Icons.live_tv_outlined,
-                    color: AppColors.error,
-                    trend: '+5 today',
-                    isPositiveTrend: true,
-                  ),
-                  StatCard(
-                    title: 'Running Auctions',
-                    value: stats.runningAuctions.toString(),
-                    icon: Icons.gavel_outlined,
-                    color: AppColors.warning,
-                    trend: '-3.1%',
-                    isPositiveTrend: false,
-                  ),
-                  StatCard(
-                    title: 'Revenue',
-                    value: CurrencyFormatter.format(stats.revenue, decimalDigits: 0),
-                    icon: Icons.payments_outlined,
-                    color: AppColors.success,
-                    trend: '+18.7%',
-                    isPositiveTrend: true,
-                  ),
-                  StatCard(
-                    title: 'Orders',
+                    title: 'Total Orders',
                     value: NumberFormat.compact().format(stats.orders),
                     icon: Icons.shopping_bag_outlined,
                     color: AppColors.info,
@@ -158,7 +133,7 @@ class DashboardPage extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 5,
-                      child: RevenueChart(data: controller.revenueData),
+                      child: OrdersChart(data: controller.ordersOverviewData),
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
@@ -179,7 +154,7 @@ class DashboardPage extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 300,
-                    child: RevenueChart(data: controller.revenueData),
+                    child: OrdersChart(data: controller.ordersOverviewData),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   SizedBox(
@@ -196,8 +171,6 @@ class DashboardPage extends StatelessWidget {
               ),
             const SizedBox(height: AppSpacing.xl),
 
-            // ── Quick Actions ────────────────────────────────────────────
-            const QuickActionsWidget(),
             const SizedBox(height: AppSpacing.xl),
           ],
         ),

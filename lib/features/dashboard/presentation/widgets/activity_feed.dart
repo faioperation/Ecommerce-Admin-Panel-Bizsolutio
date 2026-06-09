@@ -66,13 +66,13 @@ class ActivityFeedWidget extends StatelessWidget {
         iconData = Icons.store;
         color = AppColors.chartPalette[1];
         break;
-      case 'livestream':
-        iconData = Icons.live_tv;
-        color = AppColors.error;
+      case 'user':
+        iconData = Icons.person;
+        color = AppColors.info;
         break;
-      case 'auction':
-        iconData = Icons.gavel;
-        color = AppColors.warning;
+      case 'product':
+        iconData = Icons.inventory;
+        color = AppColors.success;
         break;
       default:
         iconData = Icons.notifications;
