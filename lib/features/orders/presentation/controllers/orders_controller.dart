@@ -9,6 +9,6 @@ class OrdersController extends GetxController with PageLifecycleMixin {
     // Simulate API call
     await Future.delayed(const Duration(seconds: 1));
     if (isRefresh) orders.clear();
-    orders.addAll(List.generate(10, (index) => 'Order #\${index + 1}'));
+    orders.addAll(List.generate(10, (index) => 'Order #' + (index + 1).toString()));
   }
 }

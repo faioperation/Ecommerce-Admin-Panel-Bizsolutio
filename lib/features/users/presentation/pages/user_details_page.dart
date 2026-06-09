@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/services/currency_formatter.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -134,7 +135,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                           Row(
                             children: [
                               Expanded(
-                                child: _buildStatItem('Balance', NumberFormat.currency(symbol: '\$').format(user.walletBalance)),
+                                child: _buildStatItem('Balance', CurrencyFormatter.format(user.walletBalance)),
                               ),
                               Expanded(
                                 child: _buildStatItem('Bidding Status', user.isBiddingDisabled ? 'Disabled' : 'Active'),

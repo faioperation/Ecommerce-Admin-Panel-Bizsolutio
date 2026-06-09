@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/services/currency_formatter.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -76,7 +77,7 @@ class UsersTableSource extends AppTableSource<UserEntity> {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              NumberFormat.currency(symbol: '\$').format(balance),
+              CurrencyFormatter.format(balance),
               style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w500),
             ),
           );

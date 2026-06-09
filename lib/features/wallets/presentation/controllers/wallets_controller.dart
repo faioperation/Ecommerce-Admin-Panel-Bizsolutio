@@ -8,6 +8,6 @@ class WalletsController extends GetxController with PageLifecycleMixin {
   Future<void> fetchData({bool isRefresh = false}) async {
     await Future.delayed(const Duration(seconds: 1));
     if (isRefresh) transactions.clear();
-    transactions.addAll(List.generate(10, (index) => 'Transaction #\${index + 1}'));
+    transactions.addAll(List.generate(10, (index) => 'Transaction #' + (index + 1).toString()));
   }
 }

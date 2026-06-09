@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/services/currency_formatter.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -34,8 +35,8 @@ class SellerAnalyticsWidget extends StatelessWidget {
                 child: _buildMetric(
                   context,
                   'Total Revenue',
-                  NumberFormat.currency(symbol: '\$').format(totalRevenue),
-                  Icons.attach_money,
+                  CurrencyFormatter.format(totalRevenue),
+                  Icons.payments_outlined,
                   AppColors.success,
                 ),
               ),

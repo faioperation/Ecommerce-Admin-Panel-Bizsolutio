@@ -5,6 +5,8 @@ import '../../../../core/widgets/app_button.dart';
 import '../../domain/entities/general_settings_entity.dart';
 import '../controllers/settings_controller.dart';
 import 'settings_section.dart';
+import '../../../../core/controllers/currency_controller.dart';
+import '../../../../core/constants/currency_config.dart';
 
 class GeneralSettingsPanel extends StatefulWidget {
   final SettingsController controller;
@@ -30,14 +32,16 @@ class _GeneralSettingsPanelState extends State<GeneralSettingsPanel> {
   late final TextEditingController _supportEmailCtrl;
   late final TextEditingController _supportPhoneCtrl;
   late String _timezone;
-  late String _currency;
+
+  late String _currencyCode;
+  late String _currencySymbol;
+  late String _currencyName;
+  late CurrencyPosition _currencyPosition;
 
   final List<String> _timezones = [
     'UTC', 'Asia/Dhaka', 'Asia/Kolkata', 'Asia/Dubai', 'Asia/Singapore',
     'Europe/London', 'Europe/Paris', 'America/New_York', 'America/Los_Angeles', 'Australia/Sydney',
   ];
-
-  final List<String> _currencies = ['USD', 'EUR', 'GBP', 'BDT', 'INR', 'AED', 'SGD', 'AUD'];
 
   @override
   void initState() {
@@ -50,7 +54,12 @@ class _GeneralSettingsPanelState extends State<GeneralSettingsPanel> {
     _supportEmailCtrl = TextEditingController(text: s.supportEmail);
     _supportPhoneCtrl = TextEditingController(text: s.supportPhone);
     _timezone = s.timezone;
-    _currency = s.currency;
+    
+    final currentCurrency = CurrencyController.to.currency.value;
+    _currencyCode = currentCurrency.code;
+    _currencySymbol = currentCurrency.symbol;
+    _currencyName = currentCurrency.name;
+    _currencyPosition = currentCurrency.position;
   }
 
   @override
@@ -74,8 +83,19 @@ class _GeneralSettingsPanelState extends State<GeneralSettingsPanel> {
       supportEmail: _supportEmailCtrl.text,
       supportPhone: _supportPhoneCtrl.text,
       timezone: _timezone,
-      currency: _currency,
+      currency: _currencyCode, // keep the entity updated with the code
     );
+    
+    // Save Currency settings globally
+    await CurrencyController.to.updateCurrency(
+      CurrencyConfig(
+        code: _currencyCode,
+        symbol: _currencySymbol,
+        name: _currencyName,
+        position: _currencyPosition,
+      ),
+    );
+
     final ok = await widget.controller.saveGeneralSettings(updated);
     if (ok && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -124,15 +144,56 @@ class _GeneralSettingsPanelState extends State<GeneralSettingsPanel> {
                   onChanged: (v) => setState(() => _timezone = v ?? _timezone),
                 ),
               ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.lg),
+
+          // ── Currency Settings ──
+          SettingsSection(
+            title: 'Currency Settings',
+            subtitle: 'Global currency formatting for the entire platform',
+            icon: Icons.payments_outlined,
+            iconColor: AppColors.success,
+            children: [
               SettingsFormRow(
-                label: 'Currency',
-                field: DropdownButtonFormField<String>(
-                  initialValue: _currency,
+                label: 'Currency Code',
+                hint: 'e.g. GBP, USD, EUR',
+                field: TextFormField(
+                  initialValue: _currencyCode,
+                  onChanged: (v) => _currencyCode = v,
+                  decoration: _inputDeco('e.g. GBP'),
+                  validator: (v) => (v == null || v.isEmpty) ? 'Required' : null,
+                ),
+              ),
+              SettingsFormRow(
+                label: 'Currency Symbol',
+                hint: 'e.g. £, \$, €',
+                field: TextFormField(
+                  initialValue: _currencySymbol,
+                  onChanged: (v) => _currencySymbol = v,
+                  decoration: _inputDeco('e.g. £'),
+                  validator: (v) => (v == null || v.isEmpty) ? 'Required' : null,
+                ),
+              ),
+              SettingsFormRow(
+                label: 'Currency Name',
+                hint: 'e.g. British Pound',
+                field: TextFormField(
+                  initialValue: _currencyName,
+                  onChanged: (v) => _currencyName = v,
+                  decoration: _inputDeco('e.g. British Pound'),
+                ),
+              ),
+              SettingsFormRow(
+                label: 'Symbol Position',
+                field: DropdownButtonFormField<CurrencyPosition>(
+                  initialValue: _currencyPosition,
                   decoration: _inputDeco(null),
-                  items: _currencies
-                      .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-                      .toList(),
-                  onChanged: (v) => setState(() => _currency = v ?? _currency),
+                  items: const [
+                    DropdownMenuItem(value: CurrencyPosition.left, child: Text('Left (e.g. £100)')),
+                    DropdownMenuItem(value: CurrencyPosition.right, child: Text('Right (e.g. 100€)')),
+                  ],
+                  onChanged: (v) => setState(() => _currencyPosition = v ?? _currencyPosition),
                 ),
               ),
             ],

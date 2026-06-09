@@ -4,6 +4,7 @@ import '../../domain/entities/dashboard_stats.dart';
 import '../../domain/repositories/dashboard_repository.dart';
 import '../models/dashboard_stats_model.dart';
 import '../models/activity_feed_model.dart';
+import '../../../../core/services/currency_formatter.dart';
 
 class DashboardRepositoryImpl implements DashboardRepository {
   // ignore: unused_field — will be used when backend API is connected
@@ -31,8 +32,8 @@ class DashboardRepositoryImpl implements DashboardRepository {
     return [
       ActivityFeedModel(id: '1', title: 'New Seller Registered', description: 'TechStore joined the platform.', timestamp: DateTime.now().subtract(const Duration(minutes: 5)), type: 'seller'),
       ActivityFeedModel(id: '2', title: 'Livestream Started', description: 'GadgetGuru is live now.', timestamp: DateTime.now().subtract(const Duration(minutes: 15)), type: 'livestream'),
-      ActivityFeedModel(id: '3', title: 'Large Order Placed', description: 'Order #4829 for \$1,200.', timestamp: DateTime.now().subtract(const Duration(hours: 1)), type: 'order'),
-      ActivityFeedModel(id: '4', title: 'Auction Ended', description: 'Vintage Rolex sold for \$8,500.', timestamp: DateTime.now().subtract(const Duration(hours: 2)), type: 'auction'),
+      ActivityFeedModel(id: '3', title: 'Large Order Placed', description: 'Order #4829 for ${CurrencyFormatter.format(1200, decimalDigits: 0)}.', timestamp: DateTime.now().subtract(const Duration(hours: 1)), type: 'order'),
+      ActivityFeedModel(id: '4', title: 'Auction Ended', description: 'Vintage Rolex sold for ${CurrencyFormatter.format(8500, decimalDigits: 0)}.', timestamp: DateTime.now().subtract(const Duration(hours: 2)), type: 'auction'),
     ];
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/services/currency_formatter.dart';
 import '../../../../core/layout/responsive_builder.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
@@ -21,7 +22,6 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<DashboardController>();
-    final currencyFormatter = NumberFormat.currency(symbol: '\$', decimalDigits: 0);
     final isMobile = ResponsiveBuilder.isMobile(context);
     final isTablet = ResponsiveBuilder.isTablet(context);
 
@@ -130,8 +130,8 @@ class DashboardPage extends StatelessWidget {
                   ),
                   StatCard(
                     title: 'Revenue',
-                    value: currencyFormatter.format(stats.revenue),
-                    icon: Icons.attach_money_outlined,
+                    value: CurrencyFormatter.format(stats.revenue, decimalDigits: 0),
+                    icon: Icons.payments_outlined,
                     color: AppColors.success,
                     trend: '+18.7%',
                     isPositiveTrend: true,

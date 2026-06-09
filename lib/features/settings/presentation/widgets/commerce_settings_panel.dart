@@ -6,6 +6,7 @@ import '../../../../core/widgets/app_button.dart';
 import '../../domain/entities/commerce_settings_entity.dart';
 import '../controllers/settings_controller.dart';
 import 'settings_section.dart';
+import '../../../../core/controllers/currency_controller.dart';
 
 class CommerceSettingsPanel extends StatefulWidget {
   final SettingsController controller;
@@ -103,6 +104,8 @@ class _CommerceSettingsPanelState extends State<CommerceSettingsPanel> {
 
   @override
   Widget build(BuildContext context) {
+    final currencySymbol = CurrencyController.to.symbol;
+    
     return Form(
       key: _formKey,
       child: Column(
@@ -148,7 +151,7 @@ class _CommerceSettingsPanelState extends State<CommerceSettingsPanel> {
             iconColor: AppColors.warning,
             children: [
               SettingsFormRow(
-                label: 'Min Bid Increment (\$)',
+                label: 'Min Bid Increment ($currencySymbol)',
                 hint: 'Minimum amount each new bid must exceed the previous',
                 field: TextFormField(
                   controller: _minBidCtrl,
@@ -192,7 +195,7 @@ class _CommerceSettingsPanelState extends State<CommerceSettingsPanel> {
             iconColor: AppColors.info,
             children: [
               SettingsFormRow(
-                label: 'Minimum Order Amount (\$)',
+                label: 'Minimum Order Amount ($currencySymbol)',
                 hint: 'Orders below this value are not accepted',
                 field: TextFormField(
                   controller: _minOrderCtrl,
@@ -203,7 +206,7 @@ class _CommerceSettingsPanelState extends State<CommerceSettingsPanel> {
                 ),
               ),
               SettingsFormRow(
-                label: 'Free Shipping Threshold (\$)',
+                label: 'Free Shipping Threshold ($currencySymbol)',
                 hint: 'Orders above this amount qualify for free shipping',
                 field: TextFormField(
                   controller: _freeShippingCtrl,
@@ -214,7 +217,7 @@ class _CommerceSettingsPanelState extends State<CommerceSettingsPanel> {
                 ),
               ),
               SettingsFormRow(
-                label: 'Default Shipping Fee (\$)',
+                label: 'Default Shipping Fee ($currencySymbol)',
                 hint: 'Applied when seller has not set a custom rate',
                 field: TextFormField(
                   controller: _shippingFeeCtrl,

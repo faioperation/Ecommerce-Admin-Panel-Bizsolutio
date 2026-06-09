@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/services/currency_formatter.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -118,7 +119,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      NumberFormat.currency(symbol: '\$').format(product.price),
+                                      CurrencyFormatter.format(product.price),
                                       style: AppTextStyles.h2.copyWith(color: AppColors.success),
                                     ),
                                     const SizedBox(height: AppSpacing.sm),

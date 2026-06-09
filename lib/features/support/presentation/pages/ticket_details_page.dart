@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/services/currency_formatter.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -337,7 +338,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
           const SizedBox(height: AppSpacing.md),
           _infoRow('Order ID', ticket.orderId ?? '-'),
           const SizedBox(height: AppSpacing.sm),
-          _infoRow('Refund Amount', '\$${ticket.refundAmount?.toStringAsFixed(2) ?? '0.00'}'),
+          _infoRow('Refund Amount', CurrencyFormatter.format(ticket.refundAmount ?? 0)),
           const SizedBox(height: AppSpacing.lg),
           Text('Evidence Submitted', style: AppTextStyles.h5),
           const SizedBox(height: AppSpacing.md),
@@ -356,7 +357,7 @@ class _TicketDetailsPageState extends State<TicketDetailsPage> {
                     onPressed: () => AppConfirmationDialog.show(
                       context,
                       title: 'Approve Refund',
-                      content: 'Are you sure you want to approve a refund of \$${ticket.refundAmount?.toStringAsFixed(2)}?',
+                      content: 'Are you sure you want to approve a refund of ${CurrencyFormatter.format(ticket.refundAmount ?? 0)}?',
                       confirmText: 'Approve',
                       onConfirm: () {
                         controller.approveRefund();
