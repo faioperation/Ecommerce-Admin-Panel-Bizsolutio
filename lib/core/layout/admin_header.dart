@@ -55,14 +55,13 @@ class AdminHeader extends StatelessWidget {
                   isDark: isDark,
                 )),
 
-              const SizedBox(width: AppSpacing.sm),
+              const Spacer(),
 
               // ── Search ──
               if (!isMobile) ...[
                 _SearchBar(isDark: isDark),
+                const SizedBox(width: AppSpacing.sm),
               ],
-
-              const Spacer(),
 
               // ── Theme Toggle ──
               Obx(() {
@@ -202,6 +201,7 @@ class _SearchBarState extends State<_SearchBar> {
       child: Focus(
         onFocusChange: (hasFocus) => setState(() => _focused = hasFocus),
         child: TextField(
+          textAlignVertical: TextAlignVertical.center,
           style: AppTextStyles.body.copyWith(
             color: widget.isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
           ),
@@ -210,30 +210,41 @@ class _SearchBarState extends State<_SearchBar> {
             hintStyle: AppTextStyles.body.copyWith(
               color: widget.isDark ? AppColors.textTertiaryDark : AppColors.textTertiaryLight,
             ),
+            prefixIconConstraints: const BoxConstraints(minWidth: 40, maxHeight: 36),
             prefixIcon: Icon(
               Icons.search_rounded, size: 18,
               color: _focused ? AppColors.primary
                   : (widget.isDark ? AppColors.textTertiaryDark : AppColors.textTertiaryLight),
             ),
+            suffixIconConstraints: const BoxConstraints(minWidth: 40, maxHeight: 36),
             suffixIcon: !_focused
-                ? Container(
-                    margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    decoration: BoxDecoration(
-                      color: widget.isDark ? AppColors.borderDark : AppColors.borderLight,
-                      borderRadius: BorderRadius.circular(4),
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: widget.isDark ? AppColors.borderDark : AppColors.borderLight,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('⌘K',
+                            style: AppTextStyles.caption.copyWith(
+                              color: widget.isDark ? AppColors.textTertiaryDark : AppColors.textTertiaryLight,
+                              fontWeight: FontWeight.w600,
+                              height: 1.1,
+                            )),
+                        ],
+                      ),
                     ),
-                    child: Text('⌘K',
-                      style: AppTextStyles.caption.copyWith(
-                        color: widget.isDark ? AppColors.textTertiaryDark : AppColors.textTertiaryLight,
-                        fontWeight: FontWeight.w600,
-                      )),
                   )
                 : null,
             border: InputBorder.none,
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
-            contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+            contentPadding: EdgeInsets.zero,
             isDense: true,
           ),
         ),
